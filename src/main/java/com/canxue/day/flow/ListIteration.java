@@ -27,7 +27,7 @@ public class ListIteration {
                     + "," + iterator.previousIndex() + ";");
         }
         System.out.println("后置循环");
-        while (iterator.hasPrevious()){
+        while (iterator.hasPrevious()) {
             System.out.println(
                     iterator.previous()
             );
@@ -35,28 +35,28 @@ public class ListIteration {
 
         }
         iterator = list.listIterator(3);
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             iterator.next();
             iterator.set(1);
         }
         System.out.println(list);
 
 
-      PriorityQueue priorityQueue = new PriorityQueue();
-
-        Comparator<Integer> comparator= new Comparator<Integer>() {
-                @Override
+        PriorityQueue priorityQueue = new PriorityQueue(new Comparator<Integer>() {
+            @Override
             public int compare(Integer o1, Integer o2) {
-//                    if (o1.equals(o2)){
-//                        return 0;
-//                    }else if (){
-//
-//                    }
-                return 0;
+                if (o1.equals(o2)) {
+                    return 0;
+                } else if (o1 > o2) {
+                    return 1;
+                }else{
+                    return -1;
+                }
             }
-        };
-    }
+        });
 
+
+    }
 
 
 }
