@@ -6,30 +6,22 @@ import lombok.Data;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Random;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @Author Lishuntao
  * @Date 2019/10/14
  */
-public class Generator {
-    @Data
-    static class People {
-        private String name;
-
-        static People show(String name) {
-            return new People(name);
-        }
-
-        public People(String name) {
-            this.name = name;
-        }
-    }
-
+public class Generator implements Supplier<String> {
     Random rand = new Random(47);
     char[] letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
     public String get() {
-        return "" + letters[rand.nextInt(letters.length)];
+        String d= "" + letters[rand.nextInt(letters.length)];
+        System.out.println(d);
+        return d;
     }
 
     /**
@@ -38,10 +30,8 @@ public class Generator {
      * @param args
      */
     public static void main(String[] args) {
-        Arrays.stream(new double[]{
-                3.12, 2.14, 1.76
-        }).forEach(n -> System.out.format("%d", n));
-        Comparator.reverseOrder();
+        String collect = Stream.generate(new Generator()).limit(30).collect(Collectors.joining());
+        System.out.println(collect);
 
 
     }
