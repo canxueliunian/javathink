@@ -1,13 +1,9 @@
 package com.canxue.day.time;
 
-import com.canxue.day.DateUtil;
+import com.canxue.day.LocalDateUtil;
 import org.junit.jupiter.api.Test;
 
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.Temporal;
 
 /**
  * @Author Lishuntao
@@ -22,7 +18,7 @@ public class Teme2 {
 
 
         LocalDate localDate = lt.plusDays(50);
-        int diffDate = DateUtil.getDiffDate(lt, localDate);
+        int diffDate = LocalDateUtil.getDiffDay(lt, localDate);
         System.out.println(diffDate);
 
     }

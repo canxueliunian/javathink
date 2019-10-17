@@ -1,18 +1,10 @@
 package com.canxue.day.time;
 
+import com.canxue.day.LocalDateUtil;
 import org.junit.jupiter.api.Test;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.Period;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.regex.Pattern;
+import java.time.*;
+
 
 /**
  * @Author Lishuntao
@@ -57,9 +49,10 @@ public class TimeTest {
 
     @Test
     public void testDateFormat() {
+        LocalDate now = LocalDate.now();
+        System.out.println(LocalDateUtil.getMonthDays(now));
 
 
     }
-
 
 }
