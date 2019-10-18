@@ -50,7 +50,6 @@ public class TimeTest {
     @Test
     public void testDateFormat() {
         LocalDate now = LocalDate.now();
-        System.out.println(LocalDateUtil.getMonthDays(now));
 
 
     }
