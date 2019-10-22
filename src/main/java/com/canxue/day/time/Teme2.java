@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.canxue.day.LocalDateUtil;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+import java.util.logging.*;
 import java.time.LocalDateTime;
 
 /**
@@ -14,19 +14,12 @@ import java.time.LocalDateTime;
  * json 与localdatetime的转换处理
  */
 public class Teme2 {
+    private static Logger logger =Logger.getLogger("Teme2");
 
     @Test
     public void bu() {
-
-       Base base = new Base();
-       base.setId(13L);
-       base.setLocalDateTime(LocalDateTime.now());
-
-
-        String s1 = JSON.toJSONStringWithDateFormat(base, LocalDateUtil.DEFAULT_PATTERN);
-        System.out.println(s1);
-        String s = JSON.toJSONString(base);
-        System.out.println(s);
+        logger.severe("输出错误");
+        logger.info("输出错误");
 
 
     }
