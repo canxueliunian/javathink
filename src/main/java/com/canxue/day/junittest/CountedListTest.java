@@ -6,10 +6,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.google.common.base.Verify.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static com.google.common.base.Preconditions.*;
 
 /**
  * @Author Lishuntao
@@ -45,17 +49,15 @@ public class CountedListTest {
         System.out.println("Cleaning up " + list.getId());
     }
 
+    public static Logger logger = LoggerFactory.getLogger(CountedListTest.class);
+
     @Test
     public void insert() {
-        try {
-            verify(1 + 2 == 4, "bad match ");
+//        assertEquals("s" ,"sssss");
+        assertFalse(true,"this is false");
+        assertEquals("ss", "put() null item","cuowumassegw");
 
-            String s = "";
-            s = verifyNotNull(s);
-        } catch (VerifyException e) {
-            System.out.println(e.getMessage());
-            assert true;
-        }
+
 
     }
 
