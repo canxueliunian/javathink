@@ -70,22 +70,42 @@ public class FileTest {
 
 
         Path path = Paths.get("pro/b.txt");
-        System.out.println("路径:"+path.toString());
+        System.out.println("路径:" + path.toString());
         int nameCount = path.getNameCount();
-        System.out.println("path 的绝对路径"+path.toAbsolutePath());
+        System.out.println("path 的绝对路径" + path.toAbsolutePath());
         File file = path.toFile();
         URI uri = path.toUri();
-        path =path.toAbsolutePath();
+        path = path.toAbsolutePath();
 
 
-        System.out.println("path 的父路径"+path.getParent());
-        System.out.println("path 的目录名"+path.getFileName());
-        System.out.println("根路径"+path.getRoot());
+        System.out.println("path 的父路径" + path.getParent());
+        System.out.println("path 的目录名" + path.getFileName());
+        System.out.println("根路径" + path.getRoot());
         Spliterator<Path> spliterator = path.spliterator();
         String s = spliterator.toString();
         System.out.println(s);
         boolean absolute = path.isAbsolute();
         System.out.println(absolute);
+    }
+
+    @Test
+    public void partsOfPaths() {
+        System.out.println(System.getProperty("os.name"));
+        Path path = Paths.get("FileTest.java").toAbsolutePath();
+        for (int i = 0; i < path.getNameCount(); i++) {
+            System.out.println(path.getName(i));
+        }
+
+        System.out.println("end with '.java'" + path.endsWith(".java"));
+        for (Path pp : path) {
+            System.out.print(pp + ": ");
+            System.out.print(path.startsWith(pp) + " : ");
+            System.out.println(path.endsWith(pp));
+
+        }
+
+        System.out.println("starts with" + path.getRoot() + " " + path
+                .startsWith(path.getRoot()));
 
 
     }
