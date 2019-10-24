@@ -21,7 +21,15 @@ public class People {
 
 
     public static void main(String[] args) {
-        log.info("shuchuceshixinxi ");
-        System.out.println("ssssss");
+       String s ="'这是一个测试'/10/20";
+        String[] split = s.split("/");
+        String d = split[0];
+
+        if (d.startsWith("'")){
+            System.out.println("hany");
+        }
+        if (d.endsWith("'")){
+            System.out.println("jhhh");
+        }
     }
 }
