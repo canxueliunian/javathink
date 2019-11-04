@@ -2,15 +2,11 @@ package com.canxue.day.file;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Properties;
-import java.util.Spliterator;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Formatter;
+import java.util.List;
+
 
 /**
  * @Author Lishuntao
@@ -18,97 +14,85 @@ import java.util.Spliterator;
  */
 public class FileTest {
 
-    static void show(String id, Object p) {
-        System.out.println(id + ":" + p);
+
+    @Test
+    public void formatterTest() {
+        // 使用 format进行格式化输出
+        System.out.printf("this is a String: %s , this is a number: %.2f", "test", 4.56f);
+        System.out.format("this is a String: %s , this is a number: %.2f", "test", 4.56f);
+
+        // %[argument_index$][flags][width]conversion
+        System.out.println();
+        double d1 = 34.34;
+        double d2 = 34.3445;
+        System.out.printf("d1: %2$6.2f  , and d2 : %1$09.6f", d1, d2);  // 使用第一个参数总共9位,保留6位小数, 空余位使用0进行填充
     }
 
-    static void info(Path p) {
-        show("toSting", p);
-        show("exists", Files.exists(p));
-        show("RegularFile", Files.isRegularFile(p));
-        show("Directory", Files.isDirectory(p));
-        show("Absolute", p.isAbsolute());
-        show("FileName", p.getFileName());
-        show("Parent", p.getParent());
-        show("Root", p.getRoot());
-        System.out.println("******************");
+    public static final List<String> OutTaskTypes = new ArrayList<String>() {
+        {
+            add("wajTask");
+            add("ismsTask");
+            add("drmsTask");
+        }
+    };
+
+    @Test
+    public void messageFormatTest() {
+
+        MessageFormat messageFormat = new MessageFormat("this is message: {0} , this is a number {1,number,##.##}");
+        Object[] array = new Object[]{
+                "测试", 425.67333
+        };
+        String format = messageFormat.format(array);
+        MessageFormat.format("this is a number {0}", "test");
+        System.out.println(format);
     }
 
     public static void main(String[] args) {
-        //获取所有的属性
-        Properties properties = System.getProperties();
-        //遍历所有的属性
-        for (String key : properties.stringPropertyNames()) {
-            //输出对应的键和值
-            System.out.println(key + "=" + properties.getProperty(key));
-        }
-
-        System.out.println(System.getProperty("os.name"));
-        info(Paths.get("C:", "path", "to", "nowhere", "NoFile.txt"));
-
-        Path p = Paths.get("D:\\myproject\\javathink\\target\\classes\\com\\canxue\\day\\file\\FileTest.class");
-        info(p);
-        Path ap = p.toAbsolutePath();
-        info(ap);
-        info(ap.getParent());
-        try {
-            info(p.toRealPath());
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-        URI u = p.toUri();
-        System.out.println("URI: " + u);
-        Path puri = Paths.get(u);
-        System.out.println(Files.exists(puri));
-        File f = ap.toFile(); // Don't be fooled
-        f.exists();
-    }
-
-
-    @Test
-    public void test01() throws URISyntaxException {
-
-
-        Path path = Paths.get("pro/b.txt");
-        System.out.println("路径:" + path.toString());
-        int nameCount = path.getNameCount();
-        System.out.println("path 的绝对路径" + path.toAbsolutePath());
-        File file = path.toFile();
-        URI uri = path.toUri();
-        path = path.toAbsolutePath();
-
-
-        System.out.println("path 的父路径" + path.getParent());
-        System.out.println("path 的目录名" + path.getFileName());
-        System.out.println("根路径" + path.getRoot());
-        Spliterator<Path> spliterator = path.spliterator();
-        String s = spliterator.toString();
-        System.out.println(s);
-        boolean absolute = path.isAbsolute();
-        System.out.println(absolute);
+        Formatter formatter = new Formatter(System.out);
+        formatter.format("this is a String: %s , this is a number: %10.2f", "test", 4.56f);
     }
 
     @Test
-    public void partsOfPaths() {
-        System.out.println(System.getProperty("os.name"));
-        Path path = Paths.get("FileTest.java").toAbsolutePath();
-        for (int i = 0; i < path.getNameCount(); i++) {
-            System.out.println(path.getName(i));
+    public void listTest() {
+
+
+        List<List> dataList = new ArrayList<List>();
+        List<People> peopleList = new ArrayList<People>();
+        People people = new People();
+        people.setName("小黄");
+        People people2 = new People();
+        people2.setName("小明");
+        peopleList.add(people2);
+        peopleList.add(people);
+        for (People p : peopleList) {
+            List<String> l = new ArrayList<>();
+            l.add(p.getName());
+            dataList.add(l);
         }
-
-        System.out.println("end with '.java'" + path.endsWith(".java"));
-        for (Path pp : path) {
-            System.out.print(pp + ": ");
-            System.out.print(path.startsWith(pp) + " : ");
-            System.out.println(path.endsWith(pp));
-
+        System.out.println(dataList);
+        System.out.println();
+        dataList.clear();
+        List<String> l = new ArrayList<>();
+        for (People p : peopleList) {
+            l.add(p.getName());
+            dataList.add(l);
         }
-
-        System.out.println("starts with" + path.getRoot() + " " + path
-                .startsWith(path.getRoot()));
+        System.out.println(dataList);
+        System.out.println();
+        dataList.clear();
+        l.clear();
+        for (People p : peopleList) {
+            l.add(p.getName());
+            dataList.add(l);
+            l.clear();
+        }
+        System.out.println(dataList);
 
 
     }
+
+
 
 
 }
