@@ -1,27 +1,15 @@
-package com.canxue.day.junittest;
+package com.canxue.test;
 
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
+import org.junit.Test;
 
 /**
  * @Author Lishuntao
- * @Date 2019/10/22
+ * @Date 2019/12/18
  */
-public class CountedList extends ArrayList<String> {
-    private static int counter = 0;
-    private int id = counter++;
 
-    public CountedList() {
-        System.out.println("CountedList #" + id);
-    }
-
-    public int getId() {
-        return id;
-    }
-
+public class DemoTest {
     @Test
-    public void test(){
+    public void testName(){
 
         System.out.println("this is a test");
         System.out.println("this is a test");

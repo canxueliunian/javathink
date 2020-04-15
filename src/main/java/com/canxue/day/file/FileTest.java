@@ -1,11 +1,16 @@
 package com.canxue.day.file;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Formatter;
+import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -53,46 +58,37 @@ public class FileTest {
         formatter.format("this is a String: %s , this is a number: %10.2f", "test", 4.56f);
     }
 
+    Pattern pattern = Pattern.compile("\\w+");
+
     @Test
-    public void listTest() {
+    public void patternTest() {
 
+        String s = "{\n" +
+                "\t\t\"domain\":\"cc10.com\",\n" +
+                "\t\"domainType\":\"1\",\n" +
+                "\t\"paraList\":[{\"ipv4List\":[\"1.1.1.1\"],\"areaId\":[\"0\"],\"ipv6List\":[\"::\"],\"orgId\":\"0\"}],\n" +
+                "\t\t\"timeStamp\":\"2019-10-30T14:44:46Z\"\n" +
+                "}";
+        JSONObject jsonObject = JSONObject.parseObject(s);
+        String domain = (String) jsonObject.get("domain");
+        System.out.println(domain);
+        JSONArray jsonArray = jsonObject.getJSONArray("paraList");
+        Iterator<Object> iterator = jsonArray.iterator();
+        while (iterator.hasNext()) {
+            JSONObject next = (JSONObject) iterator.next();
+            JSONArray ipv4List = next.getJSONArray("ipv4List");
+            Iterator<Object> iterator1 = ipv4List.iterator();
+            while (iterator1.hasNext()){
+                String next1 = (String) iterator1.next();
+                System.out.println(next);
+            }
+            System.out.println();
 
-        List<List> dataList = new ArrayList<List>();
-        List<People> peopleList = new ArrayList<People>();
-        People people = new People();
-        people.setName("小黄");
-        People people2 = new People();
-        people2.setName("小明");
-        peopleList.add(people2);
-        peopleList.add(people);
-        for (People p : peopleList) {
-            List<String> l = new ArrayList<>();
-            l.add(p.getName());
-            dataList.add(l);
         }
-        System.out.println(dataList);
-        System.out.println();
-        dataList.clear();
-        List<String> l = new ArrayList<>();
-        for (People p : peopleList) {
-            l.add(p.getName());
-            dataList.add(l);
-        }
-        System.out.println(dataList);
-        System.out.println();
-        dataList.clear();
-        l.clear();
-        for (People p : peopleList) {
-            l.add(p.getName());
-            dataList.add(l);
-            l.clear();
-        }
-        System.out.println(dataList);
 
+        System.out.println(jsonArray);
 
     }
-
-
 
 
 }

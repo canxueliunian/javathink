@@ -1,12 +1,8 @@
 package com.canxue.day.junittest;
 
-import com.sun.istack.internal.NotNull;
-import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.extern.java.Log;
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
 
 /**
  * @Author Lishuntao
@@ -31,5 +27,16 @@ public class People {
         if (d.endsWith("'")){
             System.out.println("jhhh");
         }
+    }
+    @Test
+    public void test02(){
+
+
+        StringBuffer s = new StringBuffer("1,2,3,4,5,");
+        s.delete(s.length()-1,s.length());
+        System.out.println(s);
+
+
+
     }
 }
